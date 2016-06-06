@@ -1,4 +1,5 @@
 % sample of plot <http://cn.mathworks.com/help/matlab/ref/plot.html>
+% save as PNG image
 
 clear all;
 clc;
