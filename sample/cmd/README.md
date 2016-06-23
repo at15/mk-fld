@@ -6,7 +6,7 @@
 - http://stackoverflow.com/questions/6657005/matlab-running-an-m-file-from-command-line
 
 ````
-"C:\Program Files\MATLAB\R2016a\bin\matlab.exe" -nodisplay -nosplash -nodesktop -r "cd('D:\workspace\src\github.com\at15\mk-fld\sample\cmd'); run('D:\workspace\src\github.com\at15\mk-fld\sample\cmd\hello2.m');exit;"
+"C:\Program Files\MATLAB\R2016a\bin\matlab.exe" -nosplash -nodesktop -nojvm -noFigureWindows -minimize -r "cd('D:\workspace\src\github.com\at15\mk-fld\sample\cmd'); run('D:\workspace\src\github.com\at15\mk-fld\sample\cmd\hello2.m');exit;"
 ````
 
 ## Compile to command line application
@@ -17,3 +17,8 @@
 will exit as well....)
 
 so we have to start a full MATLAB instance instead of a standalone application.
+
+## Use C++ API
+
+- http://cn.mathworks.com/help/matlab/calling-matlab-engine-from-c-c-and-fortran-programs.html
+- http://www.umiacs.umd.edu/~jsp/Downloads/MatlabEngine/MatlabEngine.pdf
