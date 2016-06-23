@@ -60,6 +60,7 @@ guidata(hObject, handles);
 
 % UIWAIT makes sample wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
+clc;
 axes(handles.axes1);
 fplot(@(x) sin(x));
 
