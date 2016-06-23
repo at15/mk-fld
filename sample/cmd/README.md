@@ -6,7 +6,7 @@
 - http://stackoverflow.com/questions/6657005/matlab-running-an-m-file-from-command-line
 
 ````
-"C:\Program Files\MATLAB\R2016a\bin\matlab.exe" -nodisplay -nosplash -nodesktop -r "cd('D:\workspace\src\github.com\at15\mk-fld\sample\cmd'); run('D:\workspace\src\github.com\at15\mk-fld\sample\cmd\hello-symbolic.m');exit;"
+"C:\Program Files\MATLAB\R2016a\bin\matlab.exe" -nodisplay -nosplash -nodesktop -r "cd('D:\workspace\src\github.com\at15\mk-fld\sample\cmd'); run('D:\workspace\src\github.com\at15\mk-fld\sample\cmd\hello2.m');exit;"
 ````
 
 ## Compile to command line application
