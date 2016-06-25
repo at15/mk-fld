@@ -81,6 +81,9 @@ varargout{1} = handles.output;
 % You MUST set GUI Command-line accessiblity to ON to allow timer callback
 % to set axes.
 % see https://cn.mathworks.com/matlabcentral/answers/102384-how-do-i-make-my-gui-plot-into-an-axes-within-the-gui-figure-rather-than-inside-of-a-new-figure-in-m
+% By default, GUI's have their Handle Visibility set to Callback, so they won't be affected by commands from the MATLAB Command Window. There are 2 ways to work around this:
+% 1. Setting the figure's and axes' HandleVisibility property to 'on'.
+% 2. Setting the root's ShowHiddenHandles property to 'on'.
 function drawPlot(obj, event, handles)
 % disp(handles);
 axes(handles.axes_main);
