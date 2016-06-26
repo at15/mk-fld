@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 25-Jun-2016 22:03:14
+% Last Modified by GUIDE v2.5 25-Jun-2016 22:54:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,14 +60,18 @@ guidata(hObject, handles);
 
 % UIWAIT makes fld wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-tic;
+start_time = tic;
+handles.start_time = start_time;
+
 % timer to update GUI time
 timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
-          'ExecutionMode', 'fixedDelay');
-timer_update_time_used.TimerFcn = {@update_timer, handles};
+    'ExecutionMode', 'fixedDelay');
 handles.timer_update_time_used = timer_update_time_used;
-start(timer_update_time_used);
+
 guidata(hObject, handles);
+
+timer_update_time_used.TimerFcn = {@update_timer, handles};
+start(timer_update_time_used);
 
 % --- Outputs from this function are returned to the command line.
 function varargout = fld_OutputFcn(hObject, eventdata, handles)
@@ -79,6 +83,11 @@ function varargout = fld_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+% --------------------------------------------------------------------
+function menu_file_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_file (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
 % --------------------------------------------------------------------
 function menu_start_Callback(hObject, eventdata, handles)
@@ -104,8 +113,7 @@ function menu_start_post_process_Callback(hObject, eventdata, handles)
 function update_timer(obj, event, handles)
 % disp(toc);
 % TODO: should properly format time
-set(handles.text_time_used, 'String', round(toc));
-
+set(handles.text_time_used, 'String', round(toc(handles.start_time)));
 
 % --- Executes during object deletion, before destroying properties.
 function figure1_DeleteFcn(hObject, eventdata, handles)
@@ -115,3 +123,6 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 disp('clean up main gui');
 stop(handles.timer_update_time_used);
 delete(handles.timer_update_time_used);
+
+
+
