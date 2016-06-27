@@ -1,4 +1,4 @@
-package: github.com/at15/mk-fld
+package: github.com/at15/mk-fld/server
 import:
 - package: github.com/spf13/cobra
   vcs: git
