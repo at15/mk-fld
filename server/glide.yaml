@@ -12,3 +12,8 @@ import:
 - package: github.com/fatih/color
   vcs: git
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
+- package: github.com/kataras/iris
+  vcs: git
+  version: 3.0.0-rc.3
+- package: github.com/iris-contrib/middleware
+  vcs: git

@@ -2,15 +2,20 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+
+	"github.com/iris-contrib/middleware/logger"
+	"github.com/kataras/iris"
 )
 
 func main() {
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "URL.Payh = %q\n", r.URL.Path)
+	fmt.Println("Starting server ....")
+	iris.Use(logger.New(iris.Logger, logger.Config{
+		EnableColors: true,
+		IP:           true,
+		Method:       true,
+	}))
+	iris.Get("/json", func(ctx *iris.Context) {
+		ctx.JSON(iris.StatusOK, map[string]string{"hello": "json"})
+	})
+	iris.Listen(":8000")
 }

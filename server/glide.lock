@@ -1,16 +1,136 @@
-hash: bc28c3a0db6666d852098d49289294c665e0b278f8aeb2167930ca9346c82fae
-updated: 2016-06-27T12:25:30.2303636+08:00
+hash: 6191634ed71911a2525b9e65ed38f9087619db32aea89485b24ed6a1397bf99f
+updated: 2016-06-28T00:35:37.380211+08:00
 imports:
+- name: github.com/eknkc/amber
+  version: 91774f050c1453128146169b626489e60108ec03
+  subpackages:
+  - github.com\eknkc\amber
+  - github.com\eknkc\amber\parser
 - name: github.com/fatih/color
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
   vcs: git
+  subpackages:
+  - github.com\fatih\color
+- name: github.com/flosch/pongo2
+  version: 7f5515449ea9bbeb00256d9cbb654c556e7d0146
+  subpackages:
+  - github.com\flosch\pongo2
+- name: github.com/fsnotify/fsnotify
+  version: 30411dbcefb7a1da7e84f75530ad3abe4011b4f8
+  subpackages:
+  - github.com\fsnotify\fsnotify
+- name: github.com/garyburd/redigo
+  version: b8dc90050f24c1a73a52f107f3f575be67b21b7c
+  subpackages:
+  - github.com\garyburd\redigo\redis
+  - github.com\garyburd\redigo\internal
+- name: github.com/imdario/mergo
+  version: 50d4dbd4eb0e84778abe37cefef140271d96fade
+  subpackages:
+  - github.com\imdario\mergo
+- name: github.com/iris-contrib/errors
+  version: 9d4599565f75fd376a8e4ae5ccc98fc078b93b69
+  subpackages:
+  - github.com\iris-contrib\errors
+- name: github.com/iris-contrib/formBinder
+  version: c311e88d3a2dd059c5d79c7ed3703cf0492088e3
+  subpackages:
+  - github.com\iris-contrib\formBinder
+- name: github.com/iris-contrib/middleware
+  version: 79d962a62d6085000d75764677d25d1d8ed38744
+  vcs: git
+  subpackages:
+  - github.com\iris-contrib\middleware\logger
+- name: github.com/iris-contrib/websocket
+  version: a2c30084384c39ce6595169df8b93d7298ac04cd
+  subpackages:
+  - github.com\iris-contrib\websocket
+- name: github.com/Joker/jade
+  version: db4d7e4f68708c5020c392b380e3565df2132840
+  subpackages:
+  - github.com\Joker\jade
+- name: github.com/kataras/iris
+  version: 5cf18b264ebf6bb4235a2af1f17c2c824fa2585a
+  vcs: git
+  subpackages:
+  - github.com\kataras\iris
+  - github.com\kataras\iris\config
+  - github.com\kataras\iris\logger
+  - github.com\kataras\iris\context
+  - github.com\kataras\iris\render\rest
+  - github.com\kataras\iris\render\template
+  - github.com\kataras\iris\sessions
+  - github.com\kataras\iris\sessions\providers\memory
+  - github.com\kataras\iris\sessions\providers\redis
+  - github.com\kataras\iris\sessions\store
+  - github.com\kataras\iris\utils
+  - github.com\kataras\iris\websocket
+  - github.com\kataras\iris\render\template\engine\amber
+  - github.com\kataras\iris\render\template\engine\html
+  - github.com\kataras\iris\render\template\engine\jade
+  - github.com\kataras\iris\render\template\engine\markdown
+  - github.com\kataras\iris\render\template\engine\pongo
+  - github.com\kataras\iris\sessions\providers\redis\service
+- name: github.com/klauspost/compress
+  version: 14eb9c4951195779ecfbec34431a976de7335b0a
+  subpackages:
+  - github.com\klauspost\compress\gzip
+  - github.com\klauspost\compress\flate
+  - github.com\klauspost\compress\zlib
+- name: github.com/klauspost/cpuid
+  version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
+  subpackages:
+  - github.com\klauspost\cpuid
+- name: github.com/klauspost/crc32
+  version: 19b0b332c9e4516a6370a0456e6182c3b5036720
+  subpackages:
+  - github.com\klauspost\crc32
+- name: github.com/mattn/go-colorable
+  version: 9056b7a9f2d1f2d96498d6d146acd1f9d5ed3d59
+  subpackages:
+  - github.com\mattn\go-colorable
+- name: github.com/mattn/go-isatty
+  version: 56b76bdf51f7708750eac80fa38b952bb9f32639
+  subpackages:
+  - github.com\mattn\go-isatty
+- name: github.com/microcosm-cc/bluemonday
+  version: 4ac6f27528d0a3f2a59e0b0a6f6b3ff0bb89fe20
+  subpackages:
+  - github.com\microcosm-cc\bluemonday
 - name: github.com/pkg/errors
   version: 01fa4104b9c248c8945d14d9f128454d5b28d595
   vcs: git
+- name: github.com/russross/blackfriday
+  version: 1d6b8e9301e720b08a8938b8c25c018285885438
+  subpackages:
+  - github.com\russross\blackfriday
+- name: github.com/shurcooL/sanitized_anchor_name
+  version: 10ef21a441db47d8b13ebcc5fd2310f636973c77
+  subpackages:
+  - github.com\shurcooL\sanitized_anchor_name
 - name: github.com/spf13/cobra
   version: bc81c21bd0d8be5ba2d6630a505d79d4467566e7
   vcs: git
 - name: github.com/spf13/viper
   version: c1ccc378a054ea8d4e38d8c67f6938d4760b53dd
   vcs: git
+- name: github.com/valyala/bytebufferpool
+  version: a3c01bbe26fff36275541489fd39848d70694b94
+  subpackages:
+  - github.com\valyala\bytebufferpool
+- name: github.com/valyala/fasthttp
+  version: 778f83ed894a22f220baa149ea1a1defd0245f3c
+  subpackages:
+  - github.com\valyala\fasthttp
+  - github.com\valyala\fasthttp\fasthttpadaptor
+  - github.com\valyala\fasthttp\fasthttputil
+- name: golang.org/x/net
+  version: e445b19913b9d40fdbdfe19ac5e3d314aafd6f63
+  subpackages:
+  - golang.org\x\net\html
+  - golang.org\x\net\html\atom
+- name: golang.org/x/sys
+  version: 62bee037599929a6e9146f29d10dd5208c43507d
+  subpackages:
+  - golang.org\x\sys\unix
 devImports: []
