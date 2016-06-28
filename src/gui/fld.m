@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 25-Jun-2016 22:54:36
+% Last Modified by GUIDE v2.5 28-Jun-2016 13:04:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -123,6 +123,3 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 disp('clean up main gui');
 stop(handles.timer_update_time_used);
 delete(handles.timer_update_time_used);
-
-
-

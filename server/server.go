@@ -14,8 +14,11 @@ func main() {
 		IP:           true,
 		Method:       true,
 	}))
-	iris.Get("/json", func(ctx *iris.Context) {
-		ctx.JSON(iris.StatusOK, map[string]string{"hello": "json"})
-	})
+	// used to test if returning json is working
+	iris.Get("/json", testGetJSON)
 	iris.Listen(":8000")
+}
+
+func testGetJSON(ctx *iris.Context) {
+	ctx.JSON(iris.StatusOK, map[string]string{"hello": "json"})
 }
