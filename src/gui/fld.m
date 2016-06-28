@@ -206,9 +206,4 @@ function btn_materials_refresh_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% https://cn.mathworks.com/matlabcentral/answers/45634-how-to-put-a-picture-on-a-button-in-a-gui
-% https://cn.mathworks.com/matlabcentral/answers/98593-how-do-i-display-an-image-on-a-gui-component-eg-pushbutton
-%  imread('assets/refresh.png') png is not allowed ...
-%  imread('assets/refresh.jpg') jpg is also not ...
-%  imread('assets/refresh.bmp') e ...
 m_get_meterials(handles)
