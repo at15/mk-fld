@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 28-Jun-2016 13:04:16
+% Last Modified by GUIDE v2.5 28-Jun-2016 18:40:59
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,18 +60,9 @@ guidata(hObject, handles);
 
 % UIWAIT makes fld wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-start_time = tic;
-handles.start_time = start_time;
+m_init(hObject, handles);
 
-% timer to update GUI time
-timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
-    'ExecutionMode', 'fixedDelay');
-handles.timer_update_time_used = timer_update_time_used;
 
-guidata(hObject, handles);
-
-timer_update_time_used.TimerFcn = {@update_timer, handles};
-start(timer_update_time_used);
 
 % --- Outputs from this function are returned to the command line.
 function varargout = fld_OutputFcn(hObject, eventdata, handles)
@@ -110,10 +101,6 @@ function menu_start_post_process_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-function update_timer(obj, event, handles)
-% disp(toc);
-% TODO: should properly format time
-set(handles.text_time_used, 'String', round(toc(handles.start_time)));
 
 % --- Executes during object deletion, before destroying properties.
 function figure1_DeleteFcn(hObject, eventdata, handles)
@@ -123,3 +110,53 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 disp('clean up main gui');
 stop(handles.timer_update_time_used);
 delete(handles.timer_update_time_used);
+
+% --- Executes during object creation, after setting all properties.
+function list_log_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to list_log (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+function m_init(hObject, handles)
+clc;
+% Init the log listbox
+set(handles.list_log,'String',{' [INFO] mk-fld GUI initialized'});
+m_init_timer(hObject, handles);
+
+function m_log(msg, handles)
+str = get(handles.list_log,'String');
+str{end + 1} = msg;
+set(handles.list_log,'String',str);
+
+function m_log_info(msg, handles)
+% NOTE: using strcat('[INFO] ', msg) will loose the trailing space
+m_log(strcat([' [INFO] ',msg]), handles)
+
+function m_log_error(msg, handles)
+m_log(strcat([' [ERROR] ',msg]), handles)
+
+function m_init_timer(hObject, handles)
+start_time = tic;
+handles.start_time = start_time;
+
+% timer to update GUI time
+timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
+    'ExecutionMode', 'fixedDelay');
+handles.timer_update_time_used = timer_update_time_used;
+
+guidata(hObject, handles);
+
+timer_update_time_used.TimerFcn = {@m_update_timer, handles};
+start(timer_update_time_used);
+m_log_info('timer started',handles);
+
+function m_update_timer(obj, event, handles)
+% disp(toc);
+% TODO: should properly format time
+set(handles.text_time_used, 'String', round(toc(handles.start_time)));
