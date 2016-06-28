@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 28-Jun-2016 18:40:59
+% Last Modified by GUIDE v2.5 28-Jun-2016 20:49:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -130,6 +130,8 @@ set(handles.list_log,'String',{' [INFO] mk-fld GUI initialized'});
 m_init_timer(hObject, handles);
 
 function m_log(msg, handles)
+% First log to console
+disp(msg);
 str = get(handles.list_log,'String');
 str{end + 1} = msg;
 set(handles.list_log,'String',str);
@@ -160,3 +162,53 @@ function m_update_timer(obj, event, handles)
 % disp(toc);
 % TODO: should properly format time
 set(handles.text_time_used, 'String', round(toc(handles.start_time)));
+
+function m_get_meterials(handles)
+try
+    m_log_info('Fetching materials', handles);
+    url = 'http://localhost:8000/materials';
+    materials = urlread(url);
+    % TODO: put materials on list box
+    disp(materials);
+    m_log_info('Got materials', handles);
+catch ex
+    m_log_error(ex.message, handles);
+    % disp(ex.message);
+end
+
+
+% --- Executes on selection change in list_materials.
+function list_materials_Callback(hObject, eventdata, handles)
+% hObject    handle to list_materials (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns list_materials contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from list_materials
+
+
+% --- Executes during object creation, after setting all properties.
+function list_materials_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to list_materials (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in btn_materials_refresh.
+function btn_materials_refresh_Callback(hObject, eventdata, handles)
+% hObject    handle to btn_materials_refresh (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% https://cn.mathworks.com/matlabcentral/answers/45634-how-to-put-a-picture-on-a-button-in-a-gui
+% https://cn.mathworks.com/matlabcentral/answers/98593-how-do-i-display-an-image-on-a-gui-component-eg-pushbutton
+%  imread('assets/refresh.png') png is not allowed ...
+%  imread('assets/refresh.jpg') jpg is also not ...
+%  imread('assets/refresh.bmp') e ...
+m_get_meterials(handles)
