@@ -128,6 +128,7 @@ clc;
 % Init the log listbox
 set(handles.list_log,'String',{' [INFO] mk-fld GUI initialized'});
 m_init_timer(hObject, handles);
+ m_get_meterials(handles);
 
 function m_log(msg, handles)
 % First log to console
@@ -169,8 +170,10 @@ try
     url = 'http://localhost:8000/materials';
     materials = urlread(url);
     % TODO: put materials on list box
-    disp(materials);
+    materials = loadjson(materials);
     m_log_info('Got materials', handles);
+    % disp(materials);
+    set(handles.list_materials, 'String', materials);
 catch ex
     m_log_error(ex.message, handles);
     % disp(ex.message);
