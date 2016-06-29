@@ -108,8 +108,9 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 disp('clean up main gui');
-stop(handles.timer_update_time_used);
-delete(handles.timer_update_time_used);
+timer_update_time_used = getappdata(handles.figure1,'timer_update_time_used');
+stop(timer_update_time_used);
+delete(timer_update_time_used);
 
 % --- Executes during object creation, after setting all properties.
 function list_log_CreateFcn(hObject, eventdata, handles)
@@ -153,13 +154,12 @@ handles.start_time = start_time;
 % timer to update GUI time
 timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
     'ExecutionMode', 'fixedDelay');
-handles.timer_update_time_used = timer_update_time_used;
-
-guidata(hObject, handles);
-
 timer_update_time_used.TimerFcn = {@m_update_timer, handles};
+
+setappdata(handles.figure1,'timer_update_time_used',timer_update_time_used); 
 start(timer_update_time_used);
 m_log_info('timer started',handles);
+
 
 function m_update_timer(obj, event, handles)
 % disp(toc);
