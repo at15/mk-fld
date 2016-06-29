@@ -107,7 +107,7 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-disp('clean up main gui');
+disp(' [INFO] Clean up timers');
 timer_update_time_used = getappdata(handles.figure1,'timer_update_time_used');
 stop(timer_update_time_used);
 delete(timer_update_time_used);
@@ -182,9 +182,16 @@ catch ex
 end
 
 function m_get_material_detail(material, handles)
-
 m_log_info(material, handles);
-m_log_info('Fetching material detail', handles);
+try
+    m_log_info('Fetching material detail', handles);
+    url = strcat('http://localhost:8000/materials/', material);
+    materialData = urlread(url);
+    materialData = loadjson(materialData);
+    disp(materialData);
+catch ex
+     m_log_error(ex.message, handles);
+end
 
 % --- Executes on selection change in list_materials.
 function list_materials_Callback(hObject, eventdata, handles)
