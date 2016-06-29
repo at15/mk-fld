@@ -128,7 +128,9 @@ clc;
 % Init the log listbox
 set(handles.list_log,'String',{' [INFO] mk-fld GUI initialized'});
 m_init_timer(hObject, handles);
- m_get_meterials(handles);
+m_get_materials(handles);
+handles.selected_material = 'dummy';
+guidata(hObject, handles);
 
 function m_log(msg, handles)
 % First log to console
@@ -164,7 +166,7 @@ function m_update_timer(obj, event, handles)
 % TODO: should properly format time
 set(handles.text_time_used, 'String', round(toc(handles.start_time)));
 
-function m_get_meterials(handles)
+function m_get_materials(handles)
 try
     m_log_info('Fetching materials', handles);
     url = 'http://localhost:8000/materials';
@@ -179,6 +181,10 @@ catch ex
     % disp(ex.message);
 end
 
+function m_get_material_detail(material, handles)
+
+m_log_info(material, handles);
+m_log_info('Fetching material detail', handles);
 
 % --- Executes on selection change in list_materials.
 function list_materials_Callback(hObject, eventdata, handles)
@@ -188,6 +194,17 @@ function list_materials_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns list_materials contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from list_materials
+
+index_selected = get(hObject,'Value');
+list = get(hObject,'String');
+material = list{index_selected};
+if strcmp(handles.selected_material, material)
+    m_log_info('Already selected, ignore', handles);
+    return;
+end
+handles.selected_material = material;
+guidata(hObject, handles);
+m_get_material_detail(material, handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -209,4 +226,4 @@ function btn_materials_refresh_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-m_get_meterials(handles)
+m_get_materials(handles)
