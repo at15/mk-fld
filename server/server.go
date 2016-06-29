@@ -1,12 +1,15 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"strings"
 
 	"github.com/iris-contrib/middleware/logger"
 	"github.com/kataras/iris"
+
+	"github.com/at15/mk-fld/server/material"
 )
 
 func main() {
@@ -17,6 +20,7 @@ func main() {
 		Method:       true,
 	}))
 	iris.Get("/materials", listAllMaterials)
+	iris.Get("/materials/:name", getMaterial)
 	// used to test if returning json is working
 	iris.Get("/json", testGetJSON)
 	iris.Listen(":8000")
@@ -41,6 +45,19 @@ func listAllMaterials(ctx *iris.Context) {
 	}
 	// fmt.Println(materials)
 	ctx.JSON(iris.StatusOK, materials)
+}
+
+func getMaterial(ctx *iris.Context) {
+	materialName := ctx.Param("name")
+	buf, err := ioutil.ReadFile("./data/materials/" + materialName + ".json")
+	if err != nil {
+		ctx.JSON(iris.StatusInternalServerError, map[string]string{"err_msg": "Can't read material data"})
+	}
+	fmt.Println(string(buf))
+	var parsed material.Material
+	err = json.Unmarshal(buf, &parsed)
+	fmt.Println(parsed)
+	fmt.Println(parsed.R["0"])
 }
 
 func testGetJSON(ctx *iris.Context) {
