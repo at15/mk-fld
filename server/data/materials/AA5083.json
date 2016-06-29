@@ -1,0 +1,13 @@
+{
+	"name":"AA5083",
+    "source":"http://www.baidu.com",
+	"hardening":[
+		"swift",
+		"voce"
+	],
+    "r":{
+        "0": 0.67,
+        "45": 0.66,
+        "90": 0.59
+    }
+}
