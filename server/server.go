@@ -50,14 +50,24 @@ func listAllMaterials(ctx *iris.Context) {
 func getMaterial(ctx *iris.Context) {
 	materialName := ctx.Param("name")
 	buf, err := ioutil.ReadFile("./data/materials/" + materialName + ".json")
+	var errMsg string
 	if err != nil {
-		ctx.JSON(iris.StatusInternalServerError, map[string]string{"err_msg": "Can't read material data"})
+		errMsg = "Can't read material data: " + err.Error()
+		ctx.JSON(iris.StatusInternalServerError, map[string]string{"err_msg": errMsg})
 	}
+	// print the json for debug
+	// TODO: add debug flag using viper
 	fmt.Println(string(buf))
 	var parsed material.Material
 	err = json.Unmarshal(buf, &parsed)
+	if err != nil {
+		errMsg = "Cant't parse JSON: " + err.Error()
+		ctx.JSON(iris.StatusInternalServerError, map[string]string{"err_msg": errMsg})
+	}
+	// print the parsed json for debug
 	fmt.Println(parsed)
-	fmt.Println(parsed.R["0"])
+	// fmt.Println(parsed.R["0"])
+	ctx.JSON(iris.StatusOK, parsed)
 }
 
 func testGetJSON(ctx *iris.Context) {
