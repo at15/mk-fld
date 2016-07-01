@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 28-Jun-2016 20:49:11
+% Last Modified by GUIDE v2.5 01-Jul-2016 16:23:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -156,7 +156,7 @@ timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
     'ExecutionMode', 'fixedDelay');
 timer_update_time_used.TimerFcn = {@m_update_timer, handles};
 
-setappdata(handles.figure1,'timer_update_time_used',timer_update_time_used); 
+setappdata(handles.figure1,'timer_update_time_used',timer_update_time_used);
 start(timer_update_time_used);
 m_log_info('timer started',handles);
 
@@ -190,17 +190,23 @@ try
     materialData = loadjson(materialData);
     set(handles.label_material, 'String', materialData.name);
     disp(materialData);
-    % show the data in table
+    % Show the data in table
     disp(materialData.r);
     % NOTE: jsonlab can not parse numeric key value
     data = {'name', materialData.name;
         'r0', materialData.r.zero;
         'r45', materialData.r.forty;
         'r90', materialData.r.nighty};
-    
     set(handles.table_material, 'Data', data);
+    % NOTE: in order to fix the following, value must be set to 1
+    % Warning: 'popupmenu' control requires that 'Value' be an integer within String range
+    % Control will not be rendered until all of its parameter values are valid
+    set(handles.select_hardening, 'Value', 1);
+    set(handles.select_hardening, 'String', materialData.hardening);
+    set(handles.select_yield, 'Value', 1);
+    set(handles.select_yield, 'String', materialData.yield);
 catch ex
-     m_log_error(ex.message, handles);
+    m_log_error(ex.message, handles);
 end
 
 % --- Executes on selection change in list_materials.
@@ -244,3 +250,49 @@ function btn_materials_refresh_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 m_get_materials(handles)
+
+
+% --- Executes on selection change in select_hardening.
+function select_hardening_Callback(hObject, eventdata, handles)
+% hObject    handle to select_hardening (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns select_hardening contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from select_hardening
+
+
+% --- Executes during object creation, after setting all properties.
+function select_hardening_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_hardening (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in select_yield.
+function select_yield_Callback(hObject, eventdata, handles)
+% hObject    handle to select_yield (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns select_yield contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from select_yield
+disp(get(hObject,'Value'));
+
+% --- Executes during object creation, after setting all properties.
+function select_yield_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_yield (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

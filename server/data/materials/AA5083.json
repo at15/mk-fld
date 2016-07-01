@@ -2,12 +2,20 @@
 	"name":"AA5083",
     "source":"http://www.sciencedirect.com/science/article/pii/S0924013608006717",
 	"hardening":[
-		"swift",
 		"voce"
 	],
+    "yield": [
+        "hill1948",
+        "barlat1989"
+    ],
     "r":{
         "zero": 0.67,
         "forty": 0.66,
         "nighty": 0.59
+    },
+    "voce":{
+        "A":416.068,
+        "B":273.068,
+        "C":8.3016
     }
 }
