@@ -188,7 +188,15 @@ try
     url = strcat('http://localhost:8000/materials/', material);
     materialData = urlread(url);
     materialData = loadjson(materialData);
+    set(handles.label_material, 'String', materialData.name);
     disp(materialData);
+    % show the data in table
+    % FIMXE: jsonlab is not parsing json properly
+    disp(materialData.r);
+    data = {'name', materialData.name;
+        'r0', materialData.r('0')};
+    
+    set(handles.table_material, 'Data', data);
 catch ex
      m_log_error(ex.message, handles);
 end
