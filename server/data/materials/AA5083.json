@@ -1,13 +1,13 @@
 {
 	"name":"AA5083",
-    "source":"http://www.baidu.com",
+    "source":"http://www.sciencedirect.com/science/article/pii/S0924013608006717",
 	"hardening":[
 		"swift",
 		"voce"
 	],
     "r":{
-        "0": 0.67,
-        "45": 0.66,
-        "90": 0.59
+        "zero": 0.67,
+        "forty": 0.66,
+        "nighty": 0.59
     }
 }

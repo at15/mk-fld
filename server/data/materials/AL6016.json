@@ -1,0 +1,13 @@
+{
+	"name":"AA6016",
+    "source":"http://www.sciencedirect.com/science/article/pii/S0020740305002687",
+	"hardening":[
+		"swift",
+		"voce"
+	],
+    "r":{
+        "zero":0.80,
+        "forty":0.43,
+        "nighty":0.61
+    }
+}

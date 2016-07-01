@@ -191,10 +191,12 @@ try
     set(handles.label_material, 'String', materialData.name);
     disp(materialData);
     % show the data in table
-    % FIMXE: jsonlab is not parsing json properly
     disp(materialData.r);
+    % NOTE: jsonlab can not parse numeric key value
     data = {'name', materialData.name;
-        'r0', materialData.r('0')};
+        'r0', materialData.r.zero;
+        'r45', materialData.r.forty;
+        'r90', materialData.r.nighty};
     
     set(handles.table_material, 'Data', data);
 catch ex

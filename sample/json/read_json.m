@@ -13,4 +13,6 @@ disp(data.obj.string); % should be value
 dataAA5083 = loadjson('aa5083.json');
 disp(dataAA5083.name);
 disp(dataAA5083.hardening);
+% FIXME: it cannot parse numeric key value
+disp(dataAA5083.r);
 
