@@ -190,7 +190,7 @@ try
     materialData = loadjson(materialData);
     set(handles.label_material, 'String', materialData.name);
     disp(materialData);
-    % Show the data in table
+    % Show material data in table
     disp(materialData.r);
     % NOTE: jsonlab can not parse numeric key value
     data = {'name', materialData.name;
@@ -205,6 +205,7 @@ try
     set(handles.select_hardening, 'String', materialData.hardening);
     set(handles.select_yield, 'Value', 1);
     set(handles.select_yield, 'String', materialData.yield);
+    setappdata(handles.figure1,'current_material', materialData);
 catch ex
     m_log_error(ex.message, handles);
 end
@@ -260,6 +261,13 @@ function select_hardening_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns select_hardening contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from select_hardening
+currentMaterial = getappdata(handles.figure1,'current_material');
+index_selected = get(hObject,'Value');
+list = get(hObject,'String');
+selectedHardening = list{index_selected};
+% disp(currentMaterial);
+disp(selectedHardening);
+disp(currentMaterial.(selectedHardening));
 
 
 % --- Executes during object creation, after setting all properties.
