@@ -266,9 +266,13 @@ index_selected = get(hObject,'Value');
 list = get(hObject,'String');
 selectedHardening = list{index_selected};
 % disp(currentMaterial);
+disp('selected hardening law is');
 disp(selectedHardening);
 disp(currentMaterial.(selectedHardening));
-
+% show map as kv in table
+% TODO: is transfor data needed?
+disp(class(currentMaterial.(selectedHardening)))
+% set(handles.table_hardening, 'Data', currentMaterial.(selectedHardening));
 
 % --- Executes during object creation, after setting all properties.
 function select_hardening_CreateFcn(hObject, eventdata, handles)
