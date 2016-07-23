@@ -9,4 +9,6 @@ type Material struct {
 	Yield     []string           `json:"yield"`
 	Swift     map[string]float64 `json:"swift"`
 	Voce      map[string]float64 `json:"voce"`
+	Hill48    map[string]float64 `json:"hill1948"`
+	Barlat89  map[string]float64 `json:"barlat1989"`
 }

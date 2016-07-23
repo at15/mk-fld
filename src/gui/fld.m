@@ -266,18 +266,12 @@ index_selected = get(hObject,'Value');
 list = get(hObject,'String');
 selectedHardening = list{index_selected};
 % disp(currentMaterial);
-disp('selected hardening law is');
-disp(selectedHardening);
-disp(currentMaterial.(selectedHardening));
+% disp('selected hardening law is');
+% disp(selectedHardening);
+% disp(currentMaterial.(selectedHardening));
 % show map as kv in table
-% TODO: is transfor data needed?
-disp(class(currentMaterial.(selectedHardening)));
+% disp(class(currentMaterial.(selectedHardening)));
 hardeningData = currentMaterial.(selectedHardening);
-names = fieldnames(hardeningData);
-% transformed = cell([length(names) 2]);
-% transformed(:,1) = names;
-% transformed(:,2) = struct2cell(hardeningData);
-% disp(transformed);
 transformed = u_struct2cell(hardeningData);
 set(handles.table_hardening, 'Data', transformed);
 
@@ -302,7 +296,13 @@ function select_yield_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns select_yield contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from select_yield
-disp(get(hObject,'Value'));
+currentMaterial = getappdata(handles.figure1,'current_material');
+index_selected = get(hObject,'Value');
+list = get(hObject,'String');
+selectedYield = list{index_selected};
+yieldData = currentMaterial.(selectedYield);
+transformed = u_struct2cell(yieldData);
+set(handles.table_yield, 'Data', transformed);
 
 % --- Executes during object creation, after setting all properties.
 function select_yield_CreateFcn(hObject, eventdata, handles)
