@@ -274,10 +274,11 @@ disp(currentMaterial.(selectedHardening));
 disp(class(currentMaterial.(selectedHardening)));
 hardeningData = currentMaterial.(selectedHardening);
 names = fieldnames(hardeningData);
-transformed = cell([length(names) 2]);
-transformed(:,1) = names;
-transformed(:,2) = struct2cell(hardeningData);
-disp(transformed);
+% transformed = cell([length(names) 2]);
+% transformed(:,1) = names;
+% transformed(:,2) = struct2cell(hardeningData);
+% disp(transformed);
+transformed = u_struct2cell(hardeningData);
 set(handles.table_hardening, 'Data', transformed);
 
 % --- Executes during object creation, after setting all properties.
@@ -314,3 +315,9 @@ function select_yield_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+function transformed = u_struct2cell(s)
+names = fieldnames(s);
+transformed = cell([length(names) 2]);
+transformed(:,1) = names;
+transformed(:,2) = struct2cell(s);
