@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 23-Jul-2016 12:57:57
+% Last Modified by GUIDE v2.5 23-Jul-2016 17:23:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -274,7 +274,8 @@ selectedHardening = list{index_selected};
 hardeningData = currentMaterial.(selectedHardening);
 transformed = u_struct2cell(hardeningData);
 set(handles.table_hardening, 'Data', transformed);
-
+setappdata(handles.figure1,'current_hardening', selectedHardening);
+ 
 % --- Executes during object creation, after setting all properties.
 function select_hardening_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to select_hardening (see GCBO)
@@ -303,6 +304,7 @@ selectedYield = list{index_selected};
 yieldData = currentMaterial.(selectedYield);
 transformed = u_struct2cell(yieldData);
 set(handles.table_yield, 'Data', transformed);
+setappdata(handles.figure1,'current_yield', selectedYield);
 
 % --- Executes during object creation, after setting all properties.
 function select_yield_CreateFcn(hObject, eventdata, handles)
@@ -321,3 +323,26 @@ names = fieldnames(s);
 transformed = cell([length(names) 2]);
 transformed(:,1) = names;
 transformed(:,2) = struct2cell(s);
+
+
+% --------------------------------------------------------------------
+function menu_file_save_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_file_save (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% TODO: save the real file
+[file,path] = uiputfile('animinit.m','Save file name');
+m_log_info('Save file to :',handles);
+m_log_info(strcat([path file]),handles);
+
+% --------------------------------------------------------------------
+function menu_file_open_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_file_open (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% TODO: open the real file
+[file,path] = uigetfile('*.m','Select the MATLAB code file');
+m_log_info('Opening file :',handles);
+m_log_info(strcat([path file]),handles);
