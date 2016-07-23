@@ -4,6 +4,7 @@ clc;
 
 s.name = 'mie';
 s.sex = 'male';
+s.age = 18;
 
 disp('result of using struc2cell');
 disp(struct2cell(s));
@@ -39,3 +40,9 @@ end
 
 disp(transformed);
 disp({1, 2; 3, 4});
+
+% NOTE: this is the easier way to convert struct to cell array
+transformed2 = cell([length(names) 2]);
+transformed2(:,1) = names;
+transformed2(:,2) = struct2cell(s);
+disp(transformed2);
