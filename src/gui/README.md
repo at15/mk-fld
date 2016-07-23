@@ -5,6 +5,6 @@ It is similar to Dynaform.
 
 ## Functionalities 
 
-- provide a material database (use xml or the golang server)
+- provide a material database (use ~~xml or~~ the golang server)
 - config material properties
 - submit the job to the solver (by saving as file or use the golang server)
