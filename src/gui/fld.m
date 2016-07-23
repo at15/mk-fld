@@ -271,8 +271,14 @@ disp(selectedHardening);
 disp(currentMaterial.(selectedHardening));
 % show map as kv in table
 % TODO: is transfor data needed?
-disp(class(currentMaterial.(selectedHardening)))
-% set(handles.table_hardening, 'Data', currentMaterial.(selectedHardening));
+disp(class(currentMaterial.(selectedHardening)));
+hardeningData = currentMaterial.(selectedHardening);
+names = fieldnames(hardeningData);
+transformed = cell([length(names) 2]);
+transformed(:,1) = names;
+transformed(:,2) = struct2cell(hardeningData);
+disp(transformed);
+set(handles.table_hardening, 'Data', transformed);
 
 % --- Executes during object creation, after setting all properties.
 function select_hardening_CreateFcn(hObject, eventdata, handles)
