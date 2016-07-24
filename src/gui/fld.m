@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 23-Jul-2016 17:23:50
+% Last Modified by GUIDE v2.5 24-Jul-2016 19:12:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -331,18 +331,19 @@ function menu_file_save_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% TODO: save the real file
 [file,path] = uiputfile('*.fldin','Save file name');
 % Get the current material, hardening, yield
 % TODO: handle error for no data or no selection
 currentMaterial = getappdata(handles.figure1,'current_material');
-% disp(currentMaterial);
 currentHardening = getappdata(handles.figure1,'current_hardening');
-% disp(currentHardening);
 currentYield = getappdata(handles.figure1,'current_yield');
-% disp(currentYield);
 currentMaterial.selected_hardening = currentHardening;
 currentMaterial.selected_yield = currentYield;
+% Get the description
+% NOTE: get return array of strings, strjoin is used
+% TODO: how to set multiline edit (when reopen old fldin file)
+description = get(handles.edit_description,'String');
+currentMaterial.description = strjoin(description,'\n');
 disp(savejson('',currentMaterial));
 fid = fopen(strcat([path file]),'w');
 % %s is used to avoid json content has special characters as formspec
@@ -361,3 +362,26 @@ function menu_file_open_Callback(hObject, eventdata, handles)
 [file,path] = uigetfile('*.fldin','Select the mk-fld input file');
 m_log_info('Opening file :',handles);
 m_log_info(strcat([path file]),handles);
+
+
+
+function edit_description_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_description (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_description as text
+%        str2double(get(hObject,'String')) returns contents of edit_description as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_description_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_description (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
