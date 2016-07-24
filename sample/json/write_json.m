@@ -15,3 +15,7 @@ jsonmesh=struct('MeshNode',[0 0 0;1 0 0;0 1 0;1 1 0;0 0 1;1 0 1;0 1 1;1 1 1],...
 disp(savejson('jmesh',jsonmesh));
 % Without rootname
 disp(savejson('',jsonmesh,'ArrayIndent',0,'FloatFormat','\t%.5g'));
+% Write to file
+fid = fopen('test.json', 'w');
+fprintf(fid, '%s', savejson('', jsonmesh));
+fclose(fid);

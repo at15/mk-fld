@@ -345,6 +345,7 @@ currentMaterial.selected_hardening = currentHardening;
 currentMaterial.selected_yield = currentYield;
 disp(savejson('',currentMaterial));
 fid = fopen(strcat([path file]),'w');
+% %s is used to avoid json content has special characters as formspec
 fprintf(fid,'%s', savejson('',currentMaterial));
 fclose(fid);
 m_log_info('Save file to :',handles);
