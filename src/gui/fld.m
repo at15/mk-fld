@@ -332,7 +332,21 @@ function menu_file_save_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % TODO: save the real file
-[file,path] = uiputfile('animinit.m','Save file name');
+[file,path] = uiputfile('*.fldin','Save file name');
+% Get the current material, hardening, yield
+% TODO: handle error for no data or no selection
+currentMaterial = getappdata(handles.figure1,'current_material');
+% disp(currentMaterial);
+currentHardening = getappdata(handles.figure1,'current_hardening');
+% disp(currentHardening);
+currentYield = getappdata(handles.figure1,'current_yield');
+% disp(currentYield);
+currentMaterial.selected_hardening = currentHardening;
+currentMaterial.selected_yield = currentYield;
+disp(savejson('',currentMaterial));
+fid = fopen(strcat([path file]),'w');
+fprintf(fid,'%s', savejson('',currentMaterial));
+fclose(fid);
 m_log_info('Save file to :',handles);
 m_log_info(strcat([path file]),handles);
 
@@ -343,6 +357,6 @@ function menu_file_open_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % TODO: open the real file
-[file,path] = uigetfile('*.m','Select the MATLAB code file');
+[file,path] = uigetfile('*.fldin','Select the mk-fld input file');
 m_log_info('Opening file :',handles);
 m_log_info(strcat([path file]),handles);

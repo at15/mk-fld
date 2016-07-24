@@ -1,0 +1,35 @@
+{
+	"name": "AA6016",
+	"r": {
+		"forty": 0.43,
+		"nighty": 0.61,
+		"zero": 0.8
+	},
+	"source": "http:\/\/www.sciencedirect.com\/science\/article\/pii\/S0020740305002687",
+	"hardening": [
+		"swift",
+		"voce"
+	],
+	"yield": [
+		"hill1948",
+		"barlat1989"
+	],
+	"swift": {
+		"epsilon_0": 0.01,
+		"k": 417.854,
+		"n": 0.245
+	},
+	"voce": {
+		"A": 318.103,
+		"B": 191.103,
+		"C": 8.706
+	},
+	"hill1948": {
+		"dummy": 0
+	},
+	"barlat1989": {
+		"m": 8
+	},
+	"selected_hardening": "voce",
+	"selected_yield": "barlat1989"
+}
