@@ -22,7 +22,7 @@ function varargout = fld(varargin)
 
 % Edit the above text to modify the response to help fld
 
-% Last Modified by GUIDE v2.5 24-Jul-2016 19:12:25
+% Last Modified by GUIDE v2.5 25-Jul-2016 09:20:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -346,6 +346,9 @@ currentMaterial.selected_yield = currentYield;
 % TODO: how to set multiline edit (when reopen old fldin file)
 description = get(handles.edit_description,'String');
 currentMaterial.description = strjoin(description,'\n');
+% Get prestrain
+prestrain = str2double(get(handles.edit_prestrain,'String'));
+currentMaterial.prestrain = prestrain;
 disp(savejson('',currentMaterial));
 fid = fopen(strcat([path file]),'w');
 % %s is used to avoid json content has special characters as formspec
@@ -379,6 +382,57 @@ function edit_description_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function edit_description_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_description (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function slider_prestrain_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_prestrain (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% disp(get(hObject, 'Value'));
+prestrain = get(hObject, 'Value');
+% disp(sprintf('%0.5f', prestrain));
+set(handles.edit_prestrain, 'String', sprintf('%0.5f', prestrain));
+
+% --- Executes during object creation, after setting all properties.
+function slider_prestrain_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_prestrain (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+
+function edit_prestrain_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_prestrain (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_prestrain as text
+%        str2double(get(hObject,'String')) returns contents of edit_prestrain as a double
+
+% Update the slider
+prestrain = str2double(get(hObject, 'String'));
+set(handles.slider_prestrain, 'Value', prestrain);
+
+% --- Executes during object creation, after setting all properties.
+function edit_prestrain_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_prestrain (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
