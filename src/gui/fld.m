@@ -331,7 +331,9 @@ function menu_file_save_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[file,path] = uiputfile('*.fldin','Save file name');
+% Generate name base on timestamp
+name = strcat(datestr(clock,'yyyy-mm-dd-HH-MM'),'-',datestr(clock,'ss'),'.fldin'); 
+[file,path] = uiputfile(name,'Save to');
 % Get the current material, hardening, yield
 % TODO: handle error for no data or no selection
 currentMaterial = getappdata(handles.figure1,'current_material');
