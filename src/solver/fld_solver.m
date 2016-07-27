@@ -60,20 +60,6 @@ guidata(hObject, handles);
 
 % UIWAIT makes fld_solver wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-start_time = tic;
-handles.start_time = start_time;
-
-% timer to update GUI time
-timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
-          'ExecutionMode', 'fixedDelay');
-handles.timer_update_time_used = timer_update_time_used;
-
-guidata(hObject, handles);
-
-% NOTE: guidata MUST by called before pass parameter to timer callback
-% MATLAB is not passing by reference, or it use shallow copy?
-timer_update_time_used.TimerFcn = {@update_timer, handles};
-start(timer_update_time_used);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -96,7 +82,6 @@ function update_timer(obj, event, handles)
 % disp(toc);
 % TODO: should properly format time
 set(handles.text_time_used, 'String', round(toc(handles.start_time)));
-% disp(handles.start_time);
 
 
 % --- Executes during object deletion, before destroying properties.
@@ -105,5 +90,3 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 disp('clean up solver');
-stop(handles.timer_update_time_used);
-delete(handles.timer_update_time_used);
