@@ -22,7 +22,7 @@ function varargout = fld_solver(varargin)
 
 % Edit the above text to modify the response to help fld_solver
 
-% Last Modified by GUIDE v2.5 25-Jun-2016 22:23:11
+% Last Modified by GUIDE v2.5 04-Aug-2016 20:37:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -89,9 +89,44 @@ timer_update_time_used = getappdata(handles.figure1,'timer_update_time_used');
 stop(timer_update_time_used);
 delete(timer_update_time_used);
 
+% --- Executes on selection change in list_log.
+function list_log_Callback(hObject, eventdata, handles)
+% hObject    handle to list_log (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns list_log contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from list_log
+
+
+% --- Executes during object creation, after setting all properties.
+function list_log_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to list_log (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
 function m_init(hObject, handles)
 clc;
 m_init_timer(handles);
+function m_log(msg, handles)
+% First log to console
+disp(msg);
+str = get(handles.list_log,'String');
+str{end + 1} = msg;
+set(handles.list_log,'String',str);
+
+function m_log_info(msg, handles)
+% NOTE: using strcat('[INFO] ', msg) will loose the trailing space
+m_log(strcat([' [INFO] ',msg]), handles)
+
+function m_log_error(msg, handles)
+m_log(strcat([' [ERROR] ',msg]), handles)
 
 function m_init_timer(handles)
 start_time = tic;
@@ -104,8 +139,11 @@ timer_update_time_used.TimerFcn = {@m_update_timer, handles};
 
 setappdata(handles.figure1,'timer_update_time_used',timer_update_time_used);
 start(timer_update_time_used);
+m_log_info('timer started',handles);
 
 function m_update_timer(obj, event, handles)
 % disp(toc);
 % TODO: should properly format time
 set(handles.text_time_used, 'String', round(toc(handles.start_time)));
+
+
