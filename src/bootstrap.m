@@ -12,8 +12,8 @@ p = fileparts(mfilename('fullpath'));
 addpath(fullfile(p, '../third_party/jsonlab'));
 
 % Add GUIs
-addpath(fullfile(p,'gui'));
-addpath(fullfile(p,'post_process'));
-addpath(fullfile(p,'solver'));
+addpath(fullfile(p,'ui_config'));
+addpath(fullfile(p,'ui_post_process'));
+addpath(fullfile(p,'ui_solver'));
 
 disp('bootstrap finished');

@@ -92,6 +92,7 @@ function menu_start_solver_Callback(hObject, eventdata, handles)
 % hObject    handle to menu_start_solver (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+% Start UI for solver, not the real solver
 fld_solver
 
 
