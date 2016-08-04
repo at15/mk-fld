@@ -60,6 +60,7 @@ guidata(hObject, handles);
 
 % UIWAIT makes fld_solver wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
+m_init(hObject, handles);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -78,15 +79,33 @@ function menu_start_post_process_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-function update_timer(obj, event, handles)
-% disp(toc);
-% TODO: should properly format time
-set(handles.text_time_used, 'String', round(toc(handles.start_time)));
-
-
 % --- Executes during object deletion, before destroying properties.
 function figure1_DeleteFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 disp('clean up solver');
+timer_update_time_used = getappdata(handles.figure1,'timer_update_time_used');
+stop(timer_update_time_used);
+delete(timer_update_time_used);
+
+function m_init(hObject, handles)
+clc;
+m_init_timer(handles);
+
+function m_init_timer(handles)
+start_time = tic;
+handles.start_time = start_time;
+
+% timer to update GUI time
+timer_update_time_used = timer('StartDelay', 1, 'Period', 1, ...
+    'ExecutionMode', 'fixedDelay');
+timer_update_time_used.TimerFcn = {@m_update_timer, handles};
+
+setappdata(handles.figure1,'timer_update_time_used',timer_update_time_used);
+start(timer_update_time_used);
+
+function m_update_timer(obj, event, handles)
+% disp(toc);
+% TODO: should properly format time
+set(handles.text_time_used, 'String', round(toc(handles.start_time)));

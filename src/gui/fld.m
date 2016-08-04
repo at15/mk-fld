@@ -128,7 +128,7 @@ function m_init(hObject, handles)
 clc;
 % Init the log listbox
 set(handles.list_log,'String',{' [INFO] mk-fld GUI initialized'});
-m_init_timer(hObject, handles);
+m_init_timer(handles);
 m_get_materials(handles);
 handles.selected_material = 'dummy';
 guidata(hObject, handles);
@@ -147,7 +147,7 @@ m_log(strcat([' [INFO] ',msg]), handles)
 function m_log_error(msg, handles)
 m_log(strcat([' [ERROR] ',msg]), handles)
 
-function m_init_timer(hObject, handles)
+function m_init_timer(handles)
 start_time = tic;
 handles.start_time = start_time;
 
