@@ -4,14 +4,18 @@ import (
 	"fmt"
 	"os/exec"
 	"path/filepath"
+    "github.com/at15/mk-fld/server/matlab"
 )
 
 // this file is used as playground
 
 func main() {
 	fmt.Println("Play with MATLAB !")
-	lookUp()
-	execScript("E:\\workspace\\src\\github.com\\at15\\mk-fld\\src\\solver\\fld_solver_main.m")
+	// lookUp()
+	// execScript("E:\\workspace\\src\\github.com\\at15\\mk-fld\\src\\solver\\fld_solver_main.m")
+    cmd := matlab.NewCommand("E:\\workspace\\src\\github.com\\at15\\mk-fld\\src\\solver\\fld_solver_main.m",
+        "a.fldin", "b.log")
+    cmd.Run()
 }
 
 func lookUp() {
@@ -36,4 +40,6 @@ func execScript(mFile string) {
 	err := cmd.Run()
 	fmt.Println(err)
 	// NOTE: err is always nil, go does not wait until the script finish execution
+
+	// TODO: try to get process https://golang.org/pkg/os/exec/
 }

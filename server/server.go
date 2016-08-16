@@ -10,9 +10,17 @@ import (
 	"github.com/kataras/iris"
 
 	"github.com/at15/mk-fld/server/material"
+	"github.com/at15/mk-fld/server/matlab"
 )
 
 func main() {
+	// startServer()
+	cmd := matlab.NewCommand("E:\\workspace\\src\\github.com\\at15\\mk-fld\\src\\solver\\fld_solver_main.m",
+		"a.fldin", "b.log")
+	cmd.Run()
+}
+
+func startServer() {
 	fmt.Println("Starting server ....")
 	iris.Use(logger.New(iris.Logger, logger.Config{
 		EnableColors: true,
