@@ -167,10 +167,11 @@ function menu_file_open_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 [file,path] = uigetfile('*.fldin','Select the mk-fld input file');
 m_log_info('Opening file :',handles);
-m_log_info(strcat([path file]),handles);
+fullPath = strcat([path file]);
+m_log_info(fullPath, handles);
 % Try parse the json file
 % TODO: Add try catch for error handling
-inputData = loadjson(strcat([path file]));
+inputData = loadjson(fullPath);
 m_log_info('File parsed', handles);
 % Add the file to Queue and Update the UI
 q = getappdata(handles.figure1, 'queue');
@@ -180,15 +181,21 @@ setappdata(handles.figure1, 'queue', q);
 % Update table_queue
 tableData = get(handles.table_queue,'Data');
 % TODO: add material name in table
-% tableData{end + 1} = {
-%   file, inputData.description, path, 0, 'debug'
-% };
+
+% TODO: 
+% - wrap to a function
+% - support larger file size, would be useful for dealing with intermediate result
+f = dir(fullPath);
+if f.bytes < 1000 
+  fileSize = sprintf('%d B', f.bytes);
+else
+  fileSize = sprintf('%0.2f KB', f.bytes / 1000);
+end
 
 [row,~] = size(tableData);
-tableData{row + 1, 1} = file;
-tableData{row + 1, 2} = inputData.description;
-tableData{row + 1, 3} = path;
-% TODO: real file size
-tableData{row + 1, 4} = '0KB';
-tableData{row + 1, 5} = 'debug';
+tableData{row + 1, end + 1} = file;
+tableData{row + 1, end + 1} = inputData.description;
+tableData{row + 1, end + 1} = path;
+tableData{row + 1, end + 1} = fileSize;
+tableData{row + 1, end + 1} = 'debug';
 set(handles.table_queue, 'Data', tableData);
