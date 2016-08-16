@@ -276,7 +276,7 @@ hardeningData = currentMaterial.(selectedHardening);
 transformed = u_struct2cell(hardeningData);
 set(handles.table_hardening, 'Data', transformed);
 setappdata(handles.figure1,'current_hardening', selectedHardening);
- 
+
 % --- Executes during object creation, after setting all properties.
 function select_hardening_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to select_hardening (see GCBO)
@@ -333,7 +333,7 @@ function menu_file_save_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Generate name base on timestamp
-name = strcat(datestr(clock,'yyyy-mm-dd-HH-MM'),'-',datestr(clock,'ss'),'.fldin'); 
+name = strcat(datestr(clock,'yyyy-mm-dd-HH-MM'),'-',datestr(clock,'ss'),'.fldin');
 [file,path] = uiputfile(name,'Save to');
 % Get the current material, hardening, yield
 % TODO: handle error for no data or no selection
@@ -368,6 +368,11 @@ function menu_file_open_Callback(hObject, eventdata, handles)
 [file,path] = uigetfile('*.fldin','Select the mk-fld input file');
 m_log_info('Opening file :',handles);
 m_log_info(strcat([path file]),handles);
+inputData = loadjson(strcat([path file]));
+m_log_info(inputData.name, handles);
+% TODO:
+% - add to current list and show chose result
+% - * diff with server side data
 
 
 

@@ -22,16 +22,16 @@ function varargout = fld_solver(varargin)
 
 % Edit the above text to modify the response to help fld_solver
 
-% Last Modified by GUIDE v2.5 04-Aug-2016 20:37:14
+% Last Modified by GUIDE v2.5 16-Aug-2016 08:50:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @fld_solver_OpeningFcn, ...
-                   'gui_OutputFcn',  @fld_solver_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @fld_solver_OpeningFcn, ...
+    'gui_OutputFcn',  @fld_solver_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -64,7 +64,7 @@ m_init(hObject, handles);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = fld_solver_OutputFcn(hObject, eventdata, handles) 
+function varargout = fld_solver_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -114,6 +114,8 @@ end
 function m_init(hObject, handles)
 clc;
 m_init_timer(handles);
+m_init_queue(handles);
+
 function m_log(msg, handles)
 % First log to console
 disp(msg);
@@ -146,4 +148,47 @@ function m_update_timer(obj, event, handles)
 % TODO: should properly format time
 set(handles.text_time_used, 'String', round(toc(handles.start_time)));
 
+function m_init_queue(handles)
+% TODO: in fact we should load unfinished jobs
+setappdata(handles.figure1,'queue',{});
+set(handles.table_queue,'Data',{});
 
+% --------------------------------------------------------------------
+function menu_file_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_file (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function menu_file_open_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_file_open (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[file,path] = uigetfile('*.fldin','Select the mk-fld input file');
+m_log_info('Opening file :',handles);
+m_log_info(strcat([path file]),handles);
+% Try parse the json file
+% TODO: Add try catch for error handling
+inputData = loadjson(strcat([path file]));
+m_log_info('File parsed', handles);
+% Add the file to Queue and Update the UI
+q = getappdata(handles.figure1, 'queue');
+q{end + 1} = inputData;
+setappdata(handles.figure1, 'queue', q);
+% disp(q);
+% Update table_queue
+tableData = get(handles.table_queue,'Data');
+% TODO: add material name in table
+% tableData{end + 1} = {
+%   file, inputData.description, path, 0, 'debug'
+% };
+
+[row,~] = size(tableData);
+tableData{row + 1, 1} = file;
+tableData{row + 1, 2} = inputData.description;
+tableData{row + 1, 3} = path;
+% TODO: real file size
+tableData{row + 1, 4} = '0KB';
+tableData{row + 1, 5} = 'debug';
+set(handles.table_queue, 'Data', tableData);
