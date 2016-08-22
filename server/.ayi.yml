@@ -1,3 +1,5 @@
 install:
     - go build -o mk.exe
     - sh -c "cp mk.exe $GOPATH/bin/mk.exe"
+test:
+    - sh -c "go test -v $(glide novendor)"

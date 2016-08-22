@@ -18,3 +18,6 @@ import:
 - package: github.com/gocraft/web
   vcs: git
   version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
+- package: github.com/stretchr/testify
+  vcs: git
+  version: d77da356e56a7428ad25149ca77381849a6a5232

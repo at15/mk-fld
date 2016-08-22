@@ -1,5 +1,5 @@
-hash: 0b085e54117d61e79f9221ea1395cb6a5329cb275edc3bc6fc00739d4b72e8c3
-updated: 2016-08-22T13:52:05.3382002+08:00
+hash: fcc8a7a0e3dd041bda6262a74da219f19bcac1b76bcc83facdf8eb6732d4112d
+updated: 2016-08-22T17:56:21.948188+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: 99064174e013895bbd9b025c31100bd1d9b590ca
@@ -49,6 +49,9 @@ imports:
   version: 103ce5cd2042f2fe629c1957abb64ab3e7f50235
 - name: github.com/spf13/viper
   version: c1ccc378a054ea8d4e38d8c67f6938d4760b53dd
+  vcs: git
+- name: github.com/stretchr/testify
+  version: d77da356e56a7428ad25149ca77381849a6a5232
   vcs: git
 - name: golang.org/x/sys
   version: 62bee037599929a6e9146f29d10dd5208c43507d
