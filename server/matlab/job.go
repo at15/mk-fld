@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/pkg/errors"
+	"github.com/satori/go.uuid"
 
 	"github.com/at15/mk-fld/server/util"
 )
@@ -41,8 +42,7 @@ func NewJob(opt JobOption) (*Job, error) {
 	}
 	return &Job{
 		JobOption: opt,
-		// TODO: real job id
-		JobID: "1",
+		JobID:     uuid.NewV4().String(),
 	}, nil
 }
 
