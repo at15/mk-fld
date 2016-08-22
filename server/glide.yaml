@@ -12,8 +12,9 @@ import:
 - package: github.com/fatih/color
   vcs: git
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
-- package: github.com/kataras/iris
+- package: github.com/Sirupsen/logrus
   vcs: git
-  version: 3.0.0-rc.3
-- package: github.com/iris-contrib/middleware
+  version: 0.10.0
+- package: github.com/gocraft/web
   vcs: git
+  version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
