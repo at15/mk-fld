@@ -21,3 +21,6 @@ import:
 - package: github.com/stretchr/testify
   vcs: git
   version: d77da356e56a7428ad25149ca77381849a6a5232
+- package: github.com/satori/go.uuid
+  vcs: git
+  version: 1.1.0
