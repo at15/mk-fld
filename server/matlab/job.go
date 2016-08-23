@@ -40,6 +40,8 @@ func NewJob(opt JobOption) (*Job, error) {
 	} else {
 		return &Job{}, errors.New("log file must be set")
 	}
+
+	// NOTE: uuid = char(java.util.UUID.randomUUID); can be used in matlab to generate uuid as well
 	return &Job{
 		JobOption: opt,
 		JobID:     uuid.NewV4().String(),
