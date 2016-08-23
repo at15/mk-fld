@@ -27,3 +27,6 @@ import:
 - package: github.com/HouzuoGuo/tiedot
   vcs: git
   version: c0adec79177ce34d1c160adbf26d640c1adecfd8
+- package: github.com/shirou/gopsutil
+  vcs: git
+  version: 3562fb8aa2625aec8cac4085733a17e3da0bf5dd

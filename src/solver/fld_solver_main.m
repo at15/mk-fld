@@ -35,9 +35,15 @@ if ~exist('jobId', 'var')
 else
     log_infof('job id %s', jobId);
 end
+% Get the pid, TODO: may report it to golang server to let it monitor
+pid = feature('getpid');
+log_infof('pid %d', pid);
 
 %% Calculation
 log_infof('Start calculation using %s', inputFile);
+
+% Simulate calc
+pause(30);
 
 %% Clean Up: end logging and exit
 diary off;

@@ -3,12 +3,14 @@ package cmd
 import (
 	"os"
 
+	"github.com/shirou/gopsutil/process"
 	"github.com/spf13/cobra"
 
 	"github.com/at15/mk-fld/server/matlab"
 )
 
 // start new job, list existing jobs
+var pid int
 
 var jobCmd = &cobra.Command{
 	Use:   "job",
@@ -34,12 +36,45 @@ var jobNewCmd = &cobra.Command{
 			os.Exit(1)
 		} else {
 			job.Run()
+			log.Info("Job finished")
 		}
+	},
+}
+
+var jobPIDCmd = &cobra.Command{
+	Use:   "pid",
+	Short: "monitor process via pid",
+	Long:  "get process status via pid",
+	Run: func(cmd *cobra.Command, args []string) {
+		log.Infof("PID %d", pid)
+		if pid == 0 {
+			log.Error("Invalid PID")
+			return
+		}
+		_, err := os.FindProcess(pid)
+		if err != nil {
+			log.Errorf("Can't find process: %s", err.Error())
+			return
+		}
+		// inspect using gopsutil (most win funcs are not implemented ....)
+		proc, err := process.NewProcess(int32(pid))
+		if err != nil {
+			log.Errorf("gopsutil can't create instance: %s", err.Error())
+			return
+		}
+		name, err := proc.Name()
+		if err != nil {
+			log.Errorf("gopsutil can't get name: %s", err.Error())
+			return
+		}
+		log.Info(name)
 	},
 }
 
 func init() {
 	jobCmd.AddCommand(jobNewCmd)
+	jobCmd.AddCommand(jobPIDCmd)
 	RootCmd.AddCommand(jobCmd)
 
+	jobPIDCmd.Flags().IntVar(&pid, "pid", 0, "pid for the process you want to monitor")
 }
