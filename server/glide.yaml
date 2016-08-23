@@ -24,3 +24,9 @@ import:
 - package: github.com/satori/go.uuid
   vcs: git
   version: 1.1.0
+- package: github.com/jinzhu/gorm
+  vcs: git
+  version: 35a2a004d880453f0bbd3716bcc63da1cb15b77b
+- package: github.com/mattn/go-sqlite3
+  vcs: git
+  version: b5c99a720374818b629fd1fbf6d2cbb4fb9a5644
