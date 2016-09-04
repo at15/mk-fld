@@ -1,7 +1,9 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 
@@ -55,6 +57,15 @@ var jobPIDCmd = &cobra.Command{
 			log.Errorf("Can't find process: %s", err.Error())
 			return
 		}
+
+		// use tasklist
+		//  TASKLIST /FI "USERNAME ne NT AUTHORITY\SYSTEM" /FI "STATUS eq running"
+		command := exec.Command("tasklist", "/FI", fmt.Sprintf("PID eq %d", pid), "/FO", "CSV", "/V", "/NH")
+		// "映像名称","PID","会话名      ","会话#   ","内存使用 ","状态  ","用户名   ","CPU 时间","窗口标题    "
+		// "MATLAB.exe","1272","Console","3","172,564 K","Running","DESKTOP-GAC9MH5\tmp","0:00:40","MATLAB R2016a"
+		command.Stdout = os.Stdout
+		command.Stderr = os.Stderr
+		command.Run()
 	},
 }
 
