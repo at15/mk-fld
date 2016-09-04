@@ -1,5 +1,5 @@
-hash: fbcfe61f3d28a8baf05e7b4b7f2ba113bb316c60fdb7ecca2b8f54e8ffaed8e7
-updated: 2016-08-23T23:38:21.8088604+08:00
+hash: 4fe6846b1d66a0bd7c19c86d4b5169d8297a7fa505c738851642eb469fd66b46
+updated: 2016-09-04T14:00:17.6669048-07:00
 imports:
 - name: github.com/BurntSushi/toml
   version: 99064174e013895bbd9b025c31100bd1d9b590ca
@@ -12,7 +12,7 @@ imports:
   version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
   vcs: git
 - name: github.com/hashicorp/hcl
-  version: baeb59c710717b06aac1dbe2270e8192ec593244
+  version: 99df0eb941dd8ddbc83d3f3605a34f6a686ac85e
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -46,9 +46,6 @@ imports:
   vcs: git
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
-  vcs: git
-- name: github.com/shirou/gopsutil
-  version: 3562fb8aa2625aec8cac4085733a17e3da0bf5dd
   vcs: git
 - name: github.com/Sirupsen/logrus
   version: 4b6ea7319e214d98c938f12692336f7ca9348d6b

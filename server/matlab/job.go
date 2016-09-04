@@ -55,4 +55,7 @@ func (j *Job) Run() {
 	cmd := exec.Command("matlab", "-nosplash", "-nodesktop", "-nojvm", "-noFigureWindows", "-minimize",
 		"-r", script)
 	cmd.Run()
+	// Print and check if the pid are the same, NOPE
+	log.Infof("PID %d", cmd.ProcessState.Pid())
+	log.Info(cmd.ProcessState.String())
 }
